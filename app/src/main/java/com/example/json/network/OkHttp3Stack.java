@@ -1,4 +1,4 @@
-package com.example.json.Network;
+package com.example.json.network;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;

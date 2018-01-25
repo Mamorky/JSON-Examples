@@ -1,4 +1,4 @@
-package com.example.json.Network;
+package com.example.json.network;
 
 import android.content.Context;
 
