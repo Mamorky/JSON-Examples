@@ -1,7 +1,10 @@
 package com.example.json.utils;
 
 import com.example.json.pojo.Contacto;
+import com.example.json.pojo.Persona;
 import com.example.json.pojo.Telefono;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,26 +43,32 @@ public class Analisis {
         JSONObject jOcontacto, jOtelefono;
         Contacto contacto;
         Telefono telefono;
-        ArrayList<Contacto> personas;
+        ArrayList<Contacto> personas = new ArrayList<>();
+
         // añadir contactos (en JSON) a personas
-
-        jAcontactos = respuesta.getJSONArray("contactos");
-
+        jAcontactos = new JSONArray(respuesta.getString("contactos"));
         for (int i = 0; i < jAcontactos.length(); i++) {
             jOcontacto = jAcontactos.getJSONObject(i);
-            jOtelefono = jOcontacto.getJSONObject("telefono");
-
             contacto = new Contacto();
             contacto.setNombre(jOcontacto.getString("nombre"));
             contacto.setDireccion(jOcontacto.getString("direccion"));
             contacto.setEmail(jOcontacto.getString("email"));
-
+            jOtelefono = jOcontacto.getJSONObject("telefono");
             telefono = new Telefono();
-            telefono.setCasa(jOcontacto.getJSONObject("telefono").getString("casa"));
-            telefono.setMovil(jOcontacto.getJSONObject("telefono").getString("movik"));
+            telefono.setCasa(jOtelefono.getString("casa"));
+            telefono.setMovil(jOtelefono.getString("movil"));
+            telefono.setTrabajo(jOtelefono.getString("trabajo"));
+            contacto.setTelefono(telefono);
+            personas.add(contacto);
         }
 
+        return personas;
+    }
 
-        return null;
+    public static Persona analizarContactosGSON(JSONObject respuesta) throws JSONException {
+        Gson gson = new GsonBuilder().create();
+        Persona p = gson.fromJson(respuesta.toString(), Persona.class);
+
+        return p;
     }
 }

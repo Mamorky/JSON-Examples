@@ -16,14 +16,17 @@
 
         </activity>
         <activity android:name=".ui.Primitiva" >
+        </activity>
+        <activity android:name=".ui.ListaContactosGSON">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ListaContactosGSON" />
-        <activity android:name=".ui.ListaContactos" />
+        <activity android:name=".ui.ListaContactos" >
+
+        </activity>
         <activity android:name=".ui.CreacionJSON" />
         <activity android:name=".ui.Repositorios"></activity>
     </application>
